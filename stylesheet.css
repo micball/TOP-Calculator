@@ -2,3 +2,91 @@
     padding: 0;
     margin: 0;
 }
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    flex: 1;
+    max-width: 700px;
+    background-color: purple;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 700px;
+    min-height: 50px;
+    border: 1px solid black;
+    font-size: 20px;
+    color: white;
+}
+
+.calcBody {
+    flex: 1;
+    max-width: 698px;
+    min-width: 698px;
+    max-height: 250px;
+    min-height: 250px;
+    display: flex;
+    background-color: plum;
+    flex-direction: column;
+    align-items: center;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    padding: 0;
+}
+
+.display {
+    flex: 1;
+    min-width: 650px;
+    min-height: 200px;
+    max-width: 650px;
+    max-height: 200px;
+    background-color: white;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 2px solid black;
+}
+
+.buttons {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 698px;
+    max-width: 698px;
+    min-height: 698px;
+    max-height: 698px;
+    border: 1px solid black;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.button {
+    background-color: lightblue;
+    color: inherit;
+    border: none;
+    padding: none;
+    font: inherit;
+    outline: inherit;
+    flex: 1;
+    min-width: calc(25% - 2px);
+    max-width: calc(25% - 2px);
+    max-height: calc(25% - 2px);
+    min-height: calc(25% - 2px);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    font-size: 40px;
+    background-color: lavender;
+}
+
+.button:hover {
+    background-color: lavenderblush;
+}
