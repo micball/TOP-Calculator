@@ -19,28 +19,37 @@ function divide(num1, num2) {
 // US2 - Operate Function
 function operate (num1, num2, func) {
     switch (func){
-        case add:
-            return add(num1, num2);
+        case 'add':
+            return add(+num1, +num2);
             break;
-        case subtract:
-            return subtract(num1, num2);
+        case 'subtract':
+            return subtract(+num1, +num2);
             break;
-        case multiply:
-            return multiply(num1, num2);
+        case 'multiply':
+            return multiply(+num1, +num2);
             break;
-        case divide:
-            return divide (num1, num2);
+        case 'divide':
+            return divide (+num1, +num2);
             break;
     }
 }
 
 // US4 - popDisplay()
 function popDisplay(char){
-    if (char == '+' || char == '-' || char == '/' || char == '*') {
-        display.textContent = display.textContent + ` ${char} `;
-    } else {
-        display.textContent = display.textContent + `${char}`;
-    }
+    switch (char){
+        case '+':
+            operatorOrder.push('add');
+            break;
+        case '-':
+            operatorOrder.push('subtract');
+            break;
+        case '×':
+            operatorOrder.push('multiply');
+            break;
+        case '÷':
+            operatorOrder.push('divide');
+            break;
+        };
 }
 
 const display = document.querySelector('.display');
@@ -55,15 +64,44 @@ for (let i = 0; i < operands.length; i++){
         display.textContent = display.textContent + `${operands[i].textContent}`;
     })
 }
+
 const operators = Array.from(document.querySelectorAll('.operator'));
 for (let i = 0; i < operators.length; i++){
     operators[i].addEventListener('click', () =>{
-        if (numberOrder[0]) {
+        if (currentNumber != '') {
                 numberOrder.push(currentNumber);
-                display.textContent
-
+                display.textContent = display.textContent + ` ${operators[i].textContent} `;
+                popDisplay(operators[i].textContent);
+                    currentNumber='';
             } else {
                 // do nothing
             }
     })
 }
+
+const clear = document.querySelector('.clear');
+clear.addEventListener('click', ()=>{
+    console.log(numberOrder);
+    console.log(operatorOrder);
+    display.textContent = '';
+    numberOrder = [];
+    operatorOrder = [];
+    currentNumber='';
+})
+
+function evalFunction(){
+    numberOrder.push(currentNumber);
+    let newNum = numberOrder[0]
+    for (let i = 0; i < operatorOrder.length; i++) {
+        newNum = operate(newNum, numberOrder[i+1], operatorOrder[i]);
+    }
+    display.textContent = roundToHundreds(newNum);
+}
+
+function roundToHundreds(num){
+    return (Math.floor(num*100)/100)
+}
+
+const evalButton = document.querySelector('.evaluate');
+evalButton.addEventListener('click', () => evalFunction());
+
